@@ -1,60 +1,34 @@
-#!/usr/bin/python3
-"""A setuptools based setup module.
-See:
-https://packaging.python.org/en/latest/distributing.html
-https://github.com/pypa/sampleproject
-"""
+#!/usr/bin/env python
 
-# Always prefer setuptools over distutils
-from setuptools import setup, find_packages
-from os import path
+from setuptools import find_packages, setup
 
-here = path.abspath(path.dirname(__file__))
-
-# Get the long description from the README file
-with open(path.join(here, 'README.md'), encoding='utf-8') as f:
-    long_description = f.read()
+test_deps = [
+    "coverage",
+    "pytest",
+    "flake8",
+]
 
 setup(
-    name="cclose_py_tools",
-    version=metadata['version'],
-    author="Cory Close",
-    author_email="puslsar2612@hotmail.com",
-    url="https://github.com/cclose/cclose_py_tools/",
-    license='MIT',
-    packages=["cclose_py_tools"],
-    scripts=["scripts/dlipower", "scripts/fence_dli"],
-    classifiers=[
-        'Development Status :: 5 - Production/Stable',
-        'Environment :: Console',
-        'Intended Audience :: Developers',
-        'Intended Audience :: System Administrators',
-        'Intended Audience :: Information Technology',
-        'License :: OSI Approved :: BSD License',
-        'Natural Language :: English',
-        'Operating System :: POSIX',
-        'Operating System :: POSIX :: Linux',
-        'Operating System :: MacOS :: MacOS X',
-        'Operating System :: POSIX :: BSD :: FreeBSD',
-        'Operating System :: POSIX :: SunOS/Solaris',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: Implementation :: CPython',
-        'Programming Language :: Python',
-        'Topic :: System :: Systems Administration',
-        'Topic :: Utilities',
-        'Topic :: Software Development :: Libraries :: Python Modules',
-        'Topic :: System :: Hardware :: Hardware Drivers',
-        'Topic :: System :: Power (UPS)',
+    name="hello_python",
+    version="1.0.0",
+    description="My First Package!",
+    python_requires='>3.9',
+    install_requires= [
+        'click ~= 8.0.3',
+        'click-log ~= 0.3.2',
+        'requests ~= 2.27',
     ],
-    long_description=readme(),
-    description="Control digital loggers web power switch",
-    requires=requires,
-    install_requires=requires,
-    package_data={
-        'dlipower': ['package_metadata.json']
+    tests_require=test_deps,
+    extras_require={
+        "test": test_deps,
     },
+    packages=find_packages(),
     include_package_data=True,
-    zip_safe=True,
+    # PIP uses this to install your script as an executable
+    # if you pip install, you can then call it with "hello_python" and that's it!
+    entry_points={
+        "console_scripts": [
+            "hello_python = hello_python.main:main",
+        ],
+    },
 )
